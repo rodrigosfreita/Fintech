@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//Rodrigo Santos Freitas Rm557981
-//Richard Camargo De Almeida Rm558367
 
 public class Client {
     private String name;
