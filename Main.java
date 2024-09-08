@@ -1,104 +1,99 @@
 import java.util.Date;
-
-
 import java.util.Scanner;
-
-//Rodrigo santos freitas Rm557981
-//Richard Camargo De Almeida Rm558367
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Inserindo informações do cliente
-        System.out.print("Digite o nome do cliente: ");
-        String nomeCliente = scanner.nextLine();
+        System.out.print("Enter the client's name: ");
+        String clientName = scanner.nextLine();
 
-        System.out.print("Digite o CPF do cliente: ");
-        String cpfCliente = scanner.nextLine();
+        System.out.print("Enter the client's CPF: ");
+        String clientCpf = scanner.nextLine();
 
-        Cliente cliente = new Cliente(nomeCliente, cpfCliente);
+        Client client = new Client(clientName, clientCpf);
 
-        // Adicionando contas ao cliente
+      
         while (true) {
-            System.out.print("\nDigite o número da conta (ou digite 'sair' para finalizar): ");
-            String numeroConta = scanner.nextLine();
-            if (numeroConta.equalsIgnoreCase("sair")) {
+            System.out.print("\nEnter the account number (or type 'exit' to finish): ");
+            String accountNumber = scanner.nextLine();
+            if (accountNumber.equalsIgnoreCase("exit")) {
                 break;
             }
 
-            System.out.print("Digite o saldo inicial da conta: ");
-            double saldoInicial = scanner.nextDouble();
-            scanner.nextLine(); // Consumir a quebra de linha
+            System.out.print("Enter the initial balance of the account: ");
+            double initialBalance = scanner.nextDouble();
+            scanner.nextLine(); 
+            System.out.print("Enter the type of account (Current/Savings): ");
+            String accountType = scanner.nextLine();
 
-            System.out.print("Digite o tipo de conta (Corrente/Poupança): ");
-            String tipoConta = scanner.nextLine();
-
-            Conta conta = new Conta(numeroConta, saldoInicial, tipoConta, nomeCliente);
-            cliente.adicionarConta(conta);
+            Account account = new Account(accountNumber, initialBalance, accountType, clientName);
+            client.addAccount(account);
         }
 
-        // Menu de operações
+        
         while (true) {
-            System.out.println("\nMenu de Operações:");
-            System.out.println("1. Exibir informações do cliente e saldos das contas");
-            System.out.println("2. Realizar transferência entre contas");
-            System.out.println("3. Realizar pagamento");
-            System.out.println("4. Sair");
-            System.out.print("Escolha uma opção: ");
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha
+            System.out.println("\nOperations Menu:");
+            System.out.println("1. Display client information and account balances");
+            System.out.println("2. Make a transfer between accounts");
+            System.out.println("3. Make a payment");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); 
 
-            if (opcao == 1) {
-                cliente.exibirInformacoesCliente();
-            } else if (opcao == 2) {
-                System.out.print("\nDigite o número da conta de origem: ");
-                String numeroContaOrigem = scanner.nextLine();
-                Conta contaOrigem = cliente.buscarContaPorNumero(numeroContaOrigem);
+            if (option == 1) {
+                client.displayClientInfo();
+            } else if (option == 2) {
+                System.out.print("\nEnter the source account number: ");
+                String sourceAccountNumber = scanner.nextLine();
+                Account sourceAccount = client.findAccountByNumber(sourceAccountNumber);
 
-                System.out.print("Digite o número da conta de destino: ");
-                String numeroContaDestino = scanner.nextLine();
-                Conta contaDestino = cliente.buscarContaPorNumero(numeroContaDestino);
+                System.out.print("Enter the destination account number: ");
+                String destinationAccountNumber = scanner.nextLine();
+                Account destinationAccount = client.findAccountByNumber(destinationAccountNumber);
 
-                if (contaOrigem != null && contaDestino != null) {
-                    System.out.print("Digite o valor a ser transferido: ");
-                    double valorTransferencia = scanner.nextDouble();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                if (sourceAccount != null && destinationAccount != null) {
+                    System.out.print("Enter the amount to be transferred: ");
+                    double transferAmount = scanner.nextDouble();
+                    scanner.nextLine();
 
-                    Transacao transacaoTransferencia = new Transacao("TX" + System.currentTimeMillis(), new Date(), valorTransferencia, "Transferência", contaOrigem, contaDestino);
-                    transacaoTransferencia.efetuarTransacao();
-                    System.out.println("Transferência realizada com sucesso.");
+                    Transaction transferTransaction = new Transaction("TX" + System.currentTimeMillis(), new Date(), transferAmount, "Transfer", sourceAccount, destinationAccount);
+                    transferTransaction.executeTransaction();
+                    System.out.println("Transfer successfully completed.");
                 } else {
-                    System.out.println("Conta de origem ou destino não encontrada.");
+                    System.out.println("Source or destination account not found.");
                 }
 
-            } else if (opcao == 3) {
-                System.out.print("\nDigite o número da conta para realizar o pagamento: ");
-                String numeroConta = scanner.nextLine();
-                Conta conta = cliente.buscarContaPorNumero(numeroConta);
+            } else if (option == 3) {
+                System.out.print("\nEnter the account number to make the payment: ");
+                String accountNumber = scanner.nextLine();
+                Account account = client.findAccountByNumber(accountNumber);
 
-                if (conta != null) {
-                    System.out.print("Digite o valor do pagamento: ");
-                    double valorPagamento = scanner.nextDouble();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                if (account != null) {
+                    System.out.print("Enter the payment amount: ");
+                    double paymentAmount = scanner.nextDouble();
+                    scanner.nextLine(); 
 
-                    System.out.print("Digite a descrição do pagamento: ");
-                    String descricaoPagamento = scanner.nextLine();
+                    System.out.print("Enter the payment description: ");
+                    String paymentDescription = scanner.nextLine();
 
-                    Pagamento pagamento = new Pagamento("PG" + System.currentTimeMillis(), valorPagamento, new Date(), conta, descricaoPagamento);
-                    pagamento.realizarPagamento();
-                    System.out.println("Pagamento realizado com sucesso.");
+                    Payment payment = new Payment("PG" + System.currentTimeMillis(), paymentAmount, new Date(), account, paymentDescription);
+                    payment.makePayment();
+                    System.out.println("Payment successfully completed.");
                 } else {
-                    System.out.println("Conta não encontrada.");
+                    System.out.println("Account not found.");
                 }
 
-            } else if (opcao == 4) {
-                System.out.println("Saindo...");
+            } else if (option == 4) {
+                System.out.println("Exiting...");
                 break;
             } else {
-                System.out.println("Opção inválida. Tente novamente.");
+                System.out.println("Invalid option. Please try again.");
             }
         }
+    }
+}
 
         // Fechando o scanner
         scanner.close();
