@@ -1,28 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//Rodrigo santos freitas Rm557981
+//Rodrigo Santos Freitas Rm557981
 //Richard Camargo De Almeida Rm558367
 
-
-public class Cliente {
-    private String nome;
+public class Client {
+    private String name;
     private String cpf;
-    private List<Conta> contas;
+    private List<Account> accounts;
 
-    public Cliente(String nome, String cpf) {
-        this.nome = nome;
+    public Client(String name, String cpf) {
+        this.name = name;
         this.cpf = cpf;
-        this.contas = new ArrayList<>();
+        this.accounts = new ArrayList<>();
     }
 
-    // Getters e Setters
-    public String getNome() {
-        return nome;
+    // Getters and Setters
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -33,29 +32,29 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public List<Conta> getContas() {
-        return contas;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void adicionarConta(Conta conta) {
-        this.contas.add(conta);
+    public void addAccount(Account account) {
+        this.accounts.add(account);
     }
 
-    public Conta buscarContaPorNumero(String numeroConta) {
-        for (Conta conta : contas) {
-            if (conta.getNumeroConta().equals(numeroConta)) {
-                return conta;
+    public Account findAccountByNumber(String accountNumber) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account;
             }
         }
         return null;
     }
 
-    public void exibirInformacoesCliente() {
-        System.out.println("Nome: " + nome);
+    public void displayClientInfo() {
+        System.out.println("Name: " + name);
         System.out.println("CPF: " + cpf);
-        System.out.println("Contas: ");
-        for (Conta conta : contas) {
-            System.out.println(" - Conta " + conta.getNumeroConta() + ": " + conta.getSaldo());
+        System.out.println("Accounts: ");
+        for (Account account : accounts) {
+            System.out.println(" - Account " + account.getAccountNumber() + ": " + account.getBalance());
         }
     }
 }
