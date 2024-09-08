@@ -1,78 +1,74 @@
 import java.util.Date;
 
+public class Payment {
+    private String paymentId;
+    private double amount;
+    private Date paymentDate;
+    private Account account;
+    private String description;
 
-//Rodrigo santos freitas Rm557981
-//Richard Camargo De Almeida Rm558367
-
-public class Pagamento {
-    private String idPagamento;
-    private double valor;
-    private Date dataPagamento;
-    private Conta conta;
-    private String descricao;
-
-    public Pagamento(String idPagamento, double valor, Date dataPagamento, Conta conta, String descricao) {
-        this.idPagamento = idPagamento;
-        this.valor = valor;
-        this.dataPagamento = dataPagamento;
-        this.conta = conta;
-        this.descricao = descricao;
+    public Payment(String paymentId, double amount, Date paymentDate, Account account, String description) {
+        this.paymentId = paymentId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.account = account;
+        this.description = description;
     }
 
-    // Getters e Setters
-    public String getIdPagamento() {
-        return idPagamento;
+   
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setIdPagamento(String idPagamento) {
-        this.idPagamento = idPagamento;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public double getValor() {
-        return valor;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public Date getDataPagamento() {
-        return dataPagamento;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
-    public Conta getConta() {
-        return conta;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setConta(Conta conta) {
-        this.conta = conta;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void realizarPagamento() {
-        if (conta.getSaldo() >= valor) {
-            conta.sacar(valor);
-            System.out.println("Pagamento de " + valor + " realizado com sucesso.");
+    public void makePayment() {
+        if (account.getBalance() >= amount) {
+            account.withdraw(amount);
+            System.out.println("Payment of " + amount + " completed successfully.");
         } else {
-            System.out.println("Saldo insuficiente para realizar o pagamento.");
+            System.out.println("Insufficient balance to complete the payment.");
         }
     }
 
-    public void exibirDetalhesPagamento() {
-        System.out.println("ID pagamento: " + idPagamento);
-        System.out.println("Data: " + dataPagamento);
-        System.out.println("Valor: " + valor);
-        System.out.println("Descrição: " + descricao);
+    public void displayPaymentDetails() {
+        System.out.println("Payment ID: " + paymentId);
+        System.out.println("Date: " + paymentDate);
+        System.out.println("Amount: " + amount);
+        System.out.println("Description: " + description);
     }
 }
