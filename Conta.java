@@ -2,79 +2,76 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//Rodrigo santos freitas Rm557981
-//Richard Camargo De Almeida Rm558367
+public class Account {
+    private String accountNumber;
+    private double balance;
+    private String accountType;
+    private String ownerName;
 
-
-public class Conta {
-    private String numeroConta;
-    private double saldo;
-    private String tipoConta;
-    private String nomeProprietario;
-
-    public Conta(String numeroConta, double saldo, String tipoConta, String nomeProprietario) {
-        this.numeroConta = numeroConta;
-        this.saldo = saldo;
-        this.tipoConta = tipoConta;
-        this.nomeProprietario = nomeProprietario;
+    public Account(String accountNumber, double balance, String accountType, String ownerName) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.accountType = accountType;
+        this.ownerName = ownerName;
     }
 
-    // Getters e Setters
-    public String getNumeroConta() {
-        return numeroConta;
+    // Getters and Setters
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public double getSaldo() {
-        return saldo;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    public String getTipoConta() {
-        return tipoConta;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setTipoConta(String tipoConta) {
-        this.tipoConta = tipoConta;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
-    public String getNomeProprietario() {
-        return nomeProprietario;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public void setNomeProprietario(String nomeProprietario) {
-        this.nomeProprietario = nomeProprietario;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
-    // Métodos de Operação
-    public void depositar(double valor) {
-        this.saldo += valor;
+    // Operation Methods
+    public void deposit(double amount) {
+        this.balance += amount;
     }
 
-    public void sacar(double valor) {
-        if (saldo >= valor) {
-            this.saldo -= valor;
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            this.balance -= amount;
         } else {
-            System.out.println("Fundos insuficientes");
+            System.out.println("Insufficient funds");
         }
     }
 
-    public void transferir(Conta destino, double valor) {
-        if (saldo >= valor) {
-            this.sacar(valor);
-            destino.depositar(valor);
+    public void transfer(Account destination, double amount) {
+        if (balance >= amount) {
+            this.withdraw(amount);
+            destination.deposit(amount);
         } else {
-            System.out.println("Fundos insuficientes para transferência");
+            System.out.println("Insufficient funds for transfer");
         }
     }
 
-    public void exibirSaldo() {
-        System.out.println("Saldo da conta " + numeroConta + ": " + saldo);
+    public void displayBalance() {
+        System.out.println("Account balance " + accountNumber + ": " + balance);
     }
 }
+
