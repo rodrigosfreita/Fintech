@@ -1,91 +1,86 @@
 import java.util.Date;
 
-//Rodrigo santos freitas Rm557981
-//Richard Camargo De Almeida Rm558367
+public class Transaction {
+    private String transactionId;
+    private Date date;
+    private double amount;
+    private String type;
+    private Account sourceAccount;
+    private Account destinationAccount;
 
-
-public class Transacao {
-    private String idTransacao;
-    private Date data;
-    private double valor;
-    private String tipo;
-    private Conta contaOrigem;
-    private Conta contaDestino;
-
-    public Transacao(String idTransacao, Date data, double valor, String tipo, Conta contaOrigem, Conta contaDestino) {
-        this.idTransacao = idTransacao;
-        this.data = data;
-        this.valor = valor;
-        this.tipo = tipo;
-        this.contaOrigem = contaOrigem;
-        this.contaDestino = contaDestino;
+    public Transaction(String transactionId, Date date, double amount, String type, Account sourceAccount, Account destinationAccount) {
+        this.transactionId = transactionId;
+        this.date = date;
+        this.amount = amount;
+        this.type = type;
+        this.sourceAccount = sourceAccount;
+        this.destinationAccount = destinationAccount;
     }
 
-    // Getters e Setters
-    public String getIdTransacao() {
-        return idTransacao;
+    // Getters and Setters
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setIdTransacao(String idTransacao) {
-        this.idTransacao = idTransacao;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public double getValor() {
-        return valor;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Conta getContaOrigem() {
-        return contaOrigem;
+    public Account getSourceAccount() {
+        return sourceAccount;
     }
 
-    public void setContaOrigem(Conta contaOrigem) {
-        this.contaOrigem = contaOrigem;
+    public void setSourceAccount(Account sourceAccount) {
+        this.sourceAccount = sourceAccount;
     }
 
-    public Conta getContaDestino() {
-        return contaDestino;
+    public Account getDestinationAccount() {
+        return destinationAccount;
     }
 
-    public void setContaDestino(Conta contaDestino) {
-        this.contaDestino = contaDestino;
+    public void setDestinationAccount(Account destinationAccount) {
+        this.destinationAccount = destinationAccount;
     }
 
-    public void efetuarTransacao() {
-        if (tipo.equals("Transferência")) {
-            contaOrigem.transferir(contaDestino, valor);
-        } else if (tipo.equals("Débito")) {
-            contaOrigem.sacar(valor);
-        } else if (tipo.equals("Crédito")) {
-            contaDestino.depositar(valor);
+    public void executeTransaction() {
+        if (type.equals("Transfer")) {
+            sourceAccount.transfer(destinationAccount, amount);
+        } else if (type.equals("Debit")) {
+            sourceAccount.withdraw(amount);
+        } else if (type.equals("Credit")) {
+            destinationAccount.deposit(amount);
         }
-        System.out.println("Transação efetuada com sucesso.");
+        System.out.println("Transaction completed successfully.");
     }
 
-    public void exibirDetalhesTransacao() {
-        System.out.println("ID Transação: " + idTransacao);
-        System.out.println("Data: " + data);
-        System.out.println("Valor: " + valor);
-        System.out.println("Tipo: " + tipo);
+    public void displayTransactionDetails() {
+        System.out.println("Transaction ID: " + transactionId);
+        System.out.println("Date: " + date);
+        System.out.println("Amount: " + amount);
+        System.out.println("Type: " + type);
     }
 }
-
